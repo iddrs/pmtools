@@ -87,7 +87,7 @@ notice(sprintf('Indenizações empenhadas de %s até %s: %s', $remessa->inicioDo
 
 // Calcula o valor mensal base para empenho
 $empenhar_mensal = round($empenhado_mes - $terco_ferias_empenhado_mes - $premio_assiduidade_empenhado_mes - $decimo_empenhado_mes - $judicial_empenhado_mes - $dea_empenhado_mes - $indenizacao_empenhado_mes, 2);
-notice(sprintf('Valor mensal a empenhar: %s', fmt_currency($empenhar_mensal)));
+notice(sprintf('Valor mensal a empenhar: %s', fmt_currency($dea_empenhado_mes)));
 
 
 // Calcula os meses a empenhar
