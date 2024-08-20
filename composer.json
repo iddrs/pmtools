@@ -1,0 +1,20 @@
+{
+    "name": "vendor/tools",
+    "description": "Description of project tools.",
+    "authors": [
+        {
+            "name": "Everton da Rosa",
+            "email": "everton3x@gmail.com"
+        }
+    ],
+    "require": {
+        "phpoffice/phpspreadsheet": "2.2.2"
+    },
+    "autoload": {
+        "files": [
+            "lib/output.php",
+            "lib/input.php",
+            "lib/db.php"
+        ]
+    }
+}
