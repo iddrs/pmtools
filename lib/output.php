@@ -43,3 +43,14 @@ function alert(string $msg): void {
 function error(string $msg): void {
     printnl(sprintf('[ ERROR  ] %s', $msg));
 }
+
+/**
+ * Formata um númrero para moeda.
+ * 
+ * @param mixed $value
+ * @param int $decimals
+ * @return string
+ */
+function fmt_currency($value, int $decimals = 2): string {
+    return number_format($value, $decimals, ',', '.');
+}
