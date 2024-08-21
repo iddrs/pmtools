@@ -10,6 +10,8 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 /**
  * Testa o relacionamento entre base legal e modalidades de contratação informada nos empenhos.
  * 
+ * Os testes abrangem apenas os empenhos emitidos dentor do mês da remessa e do ano do empenho o ano da remessa.
+ * 
  */
 
 require 'vendor/autoload.php';
@@ -25,7 +27,7 @@ $spreadsheet->getProperties()
         ->setCreator($cfg['creator'])
         ->setTitle("Base Legal e Modalidades de Contratação")
         ->setSubject("Testa o relacionamento entre base legal de contratação e as modalidades de contratação.")
-        ->setDescription("Testa o relacionamento entre base legal de contratação e as modalidades de contratação para o município de {$cfg['municipio']} dos empenhos de {$remessa->ano} emitidos até {$remessa->dataBase->format('d/m/Y')}.")
+        ->setDescription("Testa o relacionamento entre base legal de contratação e as modalidades de contratação para o município de {$cfg['municipio']} dos empenhos de {$remessa->ano} emitidos entre {$remessa->inicioDoMes->format('d/m/Y')} e {$remessa->dataBase->format('d/m/Y')}.")
         ->setKeywords('liciatação compras teste')
         ->setCategory('Table');
 
@@ -142,9 +144,11 @@ FROM
 WHERE
 	REMESSA = $1
 	AND ANO_EMPENHO = $2
+        AND DATA_EMPENHO BETWEEN $3 AND $4
+        AND VALOR_EMPENHO::numeric > 0.0
 	AND BASE_LEGAL_CONTRATACAO = 0
 	AND FORMA_CONTRATACAO NOT IN ('NSA')";
-$result = pg_query_params(connect(), $sql, [$remessa->remessa, $remessa->ano]);
+$result = pg_query_params(connect(), $sql, [$remessa->remessa, $remessa->ano, $remessa->inicioDoMes->format('Y-m-d'), $remessa->dataBase->format('Y-m-d')]);
 if($result === false) {
     throw new Exception("Falha ao executar a query [$sql].". PHP_EOL."Postgres Error:". PHP_EOL.pg_last_error(connect()));
 }
@@ -209,9 +213,11 @@ FROM
 WHERE
 	REMESSA = $1
 	AND ANO_EMPENHO = $2
+        AND DATA_EMPENHO BETWEEN $3 AND $4
+        AND VALOR_EMPENHO::numeric > 0.0
 	AND BASE_LEGAL_CONTRATACAO = 1
 	AND FORMA_CONTRATACAO NOT IN ('CNC', 'CNV', 'CNS', 'DPV', 'PRD', 'PRI', 'TMP')";
-$result = pg_query_params(connect(), $sql, [$remessa->remessa, $remessa->ano]);
+$result = pg_query_params(connect(), $sql, [$remessa->remessa, $remessa->ano, $remessa->inicioDoMes->format('Y-m-d'), $remessa->dataBase->format('Y-m-d')]);
 if($result === false) {
     throw new Exception("Falha ao executar a query [$sql].". PHP_EOL."Postgres Error:". PHP_EOL.pg_last_error(connect()));
 }
@@ -277,9 +283,11 @@ FROM
 WHERE
 	REMESSA = $1
 	AND ANO_EMPENHO = $2
+        AND DATA_EMPENHO BETWEEN $3 AND $4
+        AND VALOR_EMPENHO::numeric > 0.0
 	AND BASE_LEGAL_CONTRATACAO = 2
 	AND FORMA_CONTRATACAO NOT IN ('RDC', 'RDE', 'RIN')";
-$result = pg_query_params(connect(), $sql, [$remessa->remessa, $remessa->ano]);
+$result = pg_query_params(connect(), $sql, [$remessa->remessa, $remessa->ano, $remessa->inicioDoMes->format('Y-m-d'), $remessa->dataBase->format('Y-m-d')]);
 if($result === false) {
     throw new Exception("Falha ao executar a query [$sql].". PHP_EOL."Postgres Error:". PHP_EOL.pg_last_error(connect()));
 }
@@ -345,9 +353,11 @@ FROM
 WHERE
 	REMESSA = $1
 	AND ANO_EMPENHO = $2
+        AND DATA_EMPENHO BETWEEN $3 AND $4
+        AND VALOR_EMPENHO::numeric > 0.0
 	AND BASE_LEGAL_CONTRATACAO = 3
 	AND FORMA_CONTRATACAO NOT IN ('NSA')";
-$result = pg_query_params(connect(), $sql, [$remessa->remessa, $remessa->ano]);
+$result = pg_query_params(connect(), $sql, [$remessa->remessa, $remessa->ano, $remessa->inicioDoMes->format('Y-m-d'), $remessa->dataBase->format('Y-m-d')]);
 if($result === false) {
     throw new Exception("Falha ao executar a query [$sql].". PHP_EOL."Postgres Error:". PHP_EOL.pg_last_error(connect()));
 }
@@ -413,9 +423,11 @@ FROM
 WHERE
 	REMESSA = $1
 	AND ANO_EMPENHO = $2
+        AND DATA_EMPENHO BETWEEN $3 AND $4
+        AND VALOR_EMPENHO::numeric > 0.0
 	AND BASE_LEGAL_CONTRATACAO = 4
 	AND FORMA_CONTRATACAO NOT IN ('NSA')";
-$result = pg_query_params(connect(), $sql, [$remessa->remessa, $remessa->ano]);
+$result = pg_query_params(connect(), $sql, [$remessa->remessa, $remessa->ano, $remessa->inicioDoMes->format('Y-m-d'), $remessa->dataBase->format('Y-m-d')]);
 if($result === false) {
     throw new Exception("Falha ao executar a query [$sql].". PHP_EOL."Postgres Error:". PHP_EOL.pg_last_error(connect()));
 }
@@ -481,9 +493,11 @@ FROM
 WHERE
 	REMESSA = $1
 	AND ANO_EMPENHO = $2
+        AND DATA_EMPENHO BETWEEN $3 AND $4
+        AND VALOR_EMPENHO::numeric > 0.0
 	AND BASE_LEGAL_CONTRATACAO = 5
 	AND FORMA_CONTRATACAO NOT IN ('NSA')";
-$result = pg_query_params(connect(), $sql, [$remessa->remessa, $remessa->ano]);
+$result = pg_query_params(connect(), $sql, [$remessa->remessa, $remessa->ano, $remessa->inicioDoMes->format('Y-m-d'), $remessa->dataBase->format('Y-m-d')]);
 if($result === false) {
     throw new Exception("Falha ao executar a query [$sql].". PHP_EOL."Postgres Error:". PHP_EOL.pg_last_error(connect()));
 }
@@ -498,8 +512,8 @@ if($num_rows > 0) {
 // ------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-// Testa 06 Outra != [CHP, CPC, CPP, RPO]
-notice('Testando 06 Outra != [CHP, CPC, CPP, RPO]');
+// Testa 06 Outra != [CHP, CPC, CPP, RPO, NSA]
+notice('Testando 06 Outra != [CHP, CPC, CPP, RPO, NSA]');
 $sql = "SELECT
 	ENTIDADE AS \"Entidade\",
 	NR_EMPENHO AS \"Empenho\",
@@ -549,16 +563,18 @@ FROM
 WHERE
 	REMESSA = $1
 	AND ANO_EMPENHO = $2
+        AND DATA_EMPENHO BETWEEN $3 AND $4
+        AND VALOR_EMPENHO::numeric > 0.0
 	AND BASE_LEGAL_CONTRATACAO = 6
-	AND FORMA_CONTRATACAO NOT IN ('CHP', 'CPC', 'CPP', 'RPO')";
-$result = pg_query_params(connect(), $sql, [$remessa->remessa, $remessa->ano]);
+	AND FORMA_CONTRATACAO NOT IN ('CHP', 'CPC', 'CPP', 'RPO', 'NSA')";
+$result = pg_query_params(connect(), $sql, [$remessa->remessa, $remessa->ano, $remessa->inicioDoMes->format('Y-m-d'), $remessa->dataBase->format('Y-m-d')]);
 if($result === false) {
     throw new Exception("Falha ao executar a query [$sql].". PHP_EOL."Postgres Error:". PHP_EOL.pg_last_error(connect()));
 }
 $num_rows = pg_num_rows($result);
 if($num_rows > 0) {
     notice("Encontrados $num_rows empenhos com possíveis problemas.");
-    build_sheet($spreadsheet, 'Outra', 'Compara a base legal Outra com as modalidades permitidas (Chamamento público, Credenciamento, Chamada Pública PNAE, Adesão à Ata de Registro de Preços).', $result);
+    build_sheet($spreadsheet, 'Outra', 'Compara a base legal Outra com as modalidades permitidas (Chamamento público, Credenciamento, Chamada Pública PNAE, Adesão à Ata de Registro de Preços, Não se aplica).', $result);
 } else {
     alert("Nenhum registro retornado. Continuando próximo teste...");
 }
@@ -618,9 +634,11 @@ FROM
 WHERE
 	REMESSA = $1
 	AND ANO_EMPENHO = $2
+        AND DATA_EMPENHO BETWEEN $3 AND $4
+        AND VALOR_EMPENHO::numeric > 0.0
 	AND BASE_LEGAL_CONTRATACAO = 7
 	AND FORMA_CONTRATACAO NOT IN ('PRE', 'PRP')";
-$result = pg_query_params(connect(), $sql, [$remessa->remessa, $remessa->ano]);
+$result = pg_query_params(connect(), $sql, [$remessa->remessa, $remessa->ano, $remessa->inicioDoMes->format('Y-m-d'), $remessa->dataBase->format('Y-m-d')]);
 if($result === false) {
     throw new Exception("Falha ao executar a query [$sql].". PHP_EOL."Postgres Error:". PHP_EOL.pg_last_error(connect()));
 }
@@ -687,9 +705,11 @@ FROM
 WHERE
 	REMESSA = $1
 	AND ANO_EMPENHO = $2
+        AND DATA_EMPENHO BETWEEN $3 AND $4
+        AND VALOR_EMPENHO::numeric > 0.0
 	AND BASE_LEGAL_CONTRATACAO = 8
 	AND FORMA_CONTRATACAO NOT IN ('DPV', 'PRD', 'PRI', 'PDE', 'CCP', 'CCE', 'PCE', 'PCP')";
-$result = pg_query_params(connect(), $sql, [$remessa->remessa, $remessa->ano]);
+$result = pg_query_params(connect(), $sql, [$remessa->remessa, $remessa->ano, $remessa->inicioDoMes->format('Y-m-d'), $remessa->dataBase->format('Y-m-d')]);
 if($result === false) {
     throw new Exception("Falha ao executar a query [$sql].". PHP_EOL."Postgres Error:". PHP_EOL.pg_last_error(connect()));
 }
