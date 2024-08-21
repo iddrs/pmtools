@@ -137,7 +137,8 @@ $data_sheet->getPageSetup()
         ->setOrientation(PageSetup::ORIENTATION_PORTRAIT)
         ->setPaperSize(PageSetup::PAPERSIZE_A4)
         ->setFitToPage(true)
-        ->setFitToWidth(1);
+        ->setFitToWidth(1)
+        ->setFitToHeight(0);
 $page_header = '&L&16&BValores Empenhados como Dispensa de Pequeno Valor';
 $page_footer = '&LEmitido em &D &T&RPágina &P de &N';
 $data_sheet->getHeaderFooter()
