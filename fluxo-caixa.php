@@ -7,6 +7,7 @@
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
+use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
 use PhpOffice\PhpSpreadsheet\Worksheet\Table;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
@@ -115,13 +116,35 @@ $data_sheet->fromArray($data);
 
 // Criando tabela com os dados
 $last_line = sizeof($data);
+$total_line = $last_line+1;
 $table = new Table();
-$table->setName('fluxo_caixa');
-$table->setRange("A1:J$last_line");
+$table->setName('fluxo_caixa', "A1:J$total_line");
 $data_sheet->addTable($table);
 
+// Configurando linha de totais
+$table->setShowTotalsRow(true);
+$table->setRange("A1:J$total_line");
+$table->getColumn('A')->setTotalsRowLabel('Total');
+$data_sheet->getCell("A$total_line")->setValue('Total');
+$table->getColumn('C')->setTotalsRowFunction('sum');
+$table->getColumn('D')->setTotalsRowFunction('sum');
+$table->getColumn('E')->setTotalsRowFunction('sum');
+$table->getColumn('F')->setTotalsRowFunction('sum');
+$table->getColumn('G')->setTotalsRowFunction('sum');
+$table->getColumn('H')->setTotalsRowFunction('sum');
+$table->getColumn('I')->setTotalsRowFunction('sum');
+$table->getColumn('J')->setTotalsRowFunction('sum');
+$data_sheet->getCell("C$total_line")->setValue('=SUBTOTAL(109,fluxo_caixa[saldo_bruto])');
+$data_sheet->getCell("D$total_line")->setValue('=SUBTOTAL(109,fluxo_caixa[a_arrecadar])');
+$data_sheet->getCell("E$total_line")->setValue('=SUBTOTAL(109,fluxo_caixa[empenhado_a_pagar])');
+$data_sheet->getCell("F$total_line")->setValue('=SUBTOTAL(109,fluxo_caixa[a_empenhar])');
+$data_sheet->getCell("G$total_line")->setValue('=SUBTOTAL(109,fluxo_caixa[rp_a_pagar])');
+$data_sheet->getCell("H$total_line")->setValue('=SUBTOTAL(109,fluxo_caixa[duodecimo])');
+$data_sheet->getCell("I$total_line")->setValue('=SUBTOTAL(109,fluxo_caixa[extra_a_pagar])');
+$data_sheet->getCell("J$total_line")->setValue('=SUBTOTAL(109,fluxo_caixa[saldo_liquido])');
+
 // Formatando colunas
-$data_sheet->getStyle("C1:J$last_line")->getNumberFormat()->setFormatCode(NumberFormat::FORMAT_NUMBER_COMMA_SEPARATED2);
+$data_sheet->getStyle("C1:J$total_line")->getNumberFormat()->setFormatCode(NumberFormat::FORMAT_NUMBER_COMMA_SEPARATED2);
 $data_sheet->getColumnDimension('A')->setAutoSize(true);
 //$data_sheet->getColumnDimension('B')->setAutoSize(true);
 $data_sheet->getColumnDimension('C')->setAutoSize(true);
@@ -132,6 +155,22 @@ $data_sheet->getColumnDimension('G')->setAutoSize(true);
 $data_sheet->getColumnDimension('H')->setAutoSize(true);
 $data_sheet->getColumnDimension('I')->setAutoSize(true);
 $data_sheet->getColumnDimension('J')->setAutoSize(true);
+
+// Configurando a impressão
+$data_sheet->getPageSetup()
+        ->setOrientation(PageSetup::ORIENTATION_LANDSCAPE)
+        ->setPaperSize(PageSetup::PAPERSIZE_A4)
+        ->setFitToPage(true)
+        ->setFitToWidth(1)
+        ->setFitToHeight(0);
+$page_header = "&L&16&BFluxo de Caixa Projetado para data focal de {$remessa->fimDoAno->format('d/m/Y')} (data-base: {$remessa->fimDoAno->format('d/m/Y')}{$remessa->dataBase->format('d/m/Y')})";
+$page_footer = '&LEmitido em &D &T&RPágina &P de &N';
+$data_sheet->getHeaderFooter()
+        ->setOddHeader($page_header)
+        ->setEvenHeader($page_header)
+        ->setOddFooter($page_footer)
+        ->setEvenFooter($page_footer);
+$data_sheet->getPageSetup()->setRowsToRepeatAtTopByStartAndEnd(1, 1);
 
 
 // Gravando a planilha
