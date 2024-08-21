@@ -9,6 +9,14 @@
 
 require 'vendor/autoload.php';
 
+printnl('=======================================================================');
+printnl('ARRECADAÇÃO PRÓPRIA');
+printnl('Calcula o valor das receitas que dependem do próprio esforço de');
+printnl('arrecadação.');
+printnl('=======================================================================');
+printnl('');
+printnl('');
+
 $cfg = load_config();
 
 $remessa = read_remessa();

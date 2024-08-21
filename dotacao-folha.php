@@ -7,6 +7,13 @@
 
 require 'vendor/autoload.php';
 
+printnl('=======================================================================');
+printnl('DOTAÇÃO PARA FOLHA DE PAGAMENTO');
+printnl('Verifica se há superávit/déficit da dotação para o ano.');
+printnl('=======================================================================');
+printnl('');
+printnl('');
+
 $cfg = load_config();
 
 $remessa = read_remessa();

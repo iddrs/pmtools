@@ -12,6 +12,13 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 require_once 'vendor/autoload.php';
 
+printnl('=======================================================================');
+printnl('FLUXO DE CAIXA PROJETADO');
+printnl('Calcula o fluxo de caixa projetado por fonte de recursos.');
+printnl('=======================================================================');
+printnl('');
+printnl('');
+
 $cfg = load_config();
 
 $remessa = read_remessa();

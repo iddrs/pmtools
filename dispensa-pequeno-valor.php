@@ -12,6 +12,14 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 require 'vendor/autoload.php';
 
+printnl('=======================================================================');
+printnl('DISPENSA POR PEQUENO VALOR');
+printnl('Gera um relatório do valor empenhado por objeto cuja modalidade de ');
+printnl('contratação é dispensa por pequeno valor.');
+printnl('=======================================================================');
+printnl('');
+printnl('');
+
 $cfg = load_config();
 
 //$remessa = read_remessa();

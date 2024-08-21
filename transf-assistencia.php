@@ -8,6 +8,14 @@
 
 require 'vendor/autoload.php';
 
+printnl('=======================================================================');
+printnl('TRANSFERÊNCIAS DA ASSISTÊNCIA SOCIAL');
+printnl('Valor acumulado no ano da receita de transferências da assistência');
+printnl('social.');
+printnl('=======================================================================');
+printnl('');
+printnl('');
+
 $cfg = load_config();
 
 $remessa = read_remessa();

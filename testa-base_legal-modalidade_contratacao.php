@@ -16,6 +16,14 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 require 'vendor/autoload.php';
 
+printnl('=======================================================================');
+printnl('TESTE: BASE LEGAL x MODALIDADE DE CONTRATAÇÃO');
+printnl('Testa a consistência dos empenhos quanto ao relacionamento entre a');
+printnl('base legal e a modalidade de contratação.');
+printnl('=======================================================================');
+printnl('');
+printnl('');
+
 $cfg = load_config();
 
 $remessa = read_remessa();

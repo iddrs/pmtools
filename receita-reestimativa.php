@@ -15,6 +15,15 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 require 'vendor/autoload.php';
 
+
+printnl('=======================================================================');
+printnl('REESTIMATIVA DA RECEITA');
+printnl('Calcula a reestimativa da receita com base no valor arrecadado até o');
+printnl('mês de referência e o previsto para os meses seguintes.');
+printnl('=======================================================================');
+printnl('');
+printnl('');
+
 $cfg = load_config();
 
 $remessa = read_remessa();
