@@ -50,6 +50,7 @@ printnl('-----------------------------------------------------------------------
 printnl("Dívida\t\t\tArrecadado");
 printnl(sprintf("%s\t\t%s", 'Tributária', fmt_currency($tributaria)));
 printnl(sprintf("%s\t\t%s", 'Não Tributária', fmt_currency($nao_tributaria)));
+printnl(sprintf("%s\t\t\t%s", 'Total', fmt_currency($tributaria + $nao_tributaria)));
 printnl('-----------------------------------------------------------------------');
 
 
