@@ -6,7 +6,7 @@ use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 /**
- * Calcula os valores empenhados por dispensa de pequeno valor para a última remessa disponível no banco de dados.
+ * @description: Calcula os valores empenhados por dispensa de pequeno valor para a última remessa disponível no banco de dados.
  * 
  */
 

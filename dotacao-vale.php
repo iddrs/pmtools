@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Calcula o superavit ou deficit da dotação para vale-alimentação.
+ * @description: Calcula o superavit ou deficit da dotação para vale-alimentação.
  * 
  */
 

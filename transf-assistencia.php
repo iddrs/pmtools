@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Calcula o valor das transferências da assistência social.
+ * @description: Calcula o valor das transferências da assistência social.
  * 
  * 
  */

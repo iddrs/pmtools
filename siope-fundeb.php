@@ -7,7 +7,7 @@ use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 /**
- * Calcula o valor do Fundeb 70% e 30%
+ * @description: Calcula o valor do Fundeb 70% e 30%
  * 
  * 
  */

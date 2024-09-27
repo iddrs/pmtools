@@ -6,7 +6,7 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Table;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 /**
- * Calcula a reestimativa da receita orçamentária.
+ * @description: Calcula a reestimativa da receita orçamentária.
  * 
  * Método de cálculo:
  * 

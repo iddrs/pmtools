@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Calcula o valor da disponibilidade financeira livre na data-base.
+ * @description: Calcula o valor da disponibilidade financeira livre na data-base.
  * 
  * 
  */

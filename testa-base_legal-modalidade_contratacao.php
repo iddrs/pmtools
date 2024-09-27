@@ -8,7 +8,7 @@ use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 /**
- * Testa o relacionamento entre base legal e modalidades de contratação informada nos empenhos.
+ * @description: Testa o relacionamento entre base legal e modalidades de contratação informada nos empenhos.
  * 
  * Os testes abrangem apenas os empenhos emitidos dentor do mês da remessa e do ano do empenho o ano da remessa.
  * 
