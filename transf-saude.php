@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @description: Trasnferências da Saúde
+ * @description: Transferências da Saúde
  * 
  * Calcula o valor das transferências da saúde.
  * 
