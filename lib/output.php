@@ -54,3 +54,23 @@ function error(string $msg): void {
 function fmt_currency($value, int $decimals = 2): string {
     return number_format($value, $decimals, ',', '.');
 }
+
+/**
+ * Formata a conta contábil.
+ * 
+ * @param string $cc
+ * @return string
+ */
+function fmt_cc(string $cc): string {
+    $n1 = $cc[0];
+    $n2 = $cc[1];
+    $n3 = $cc[2];
+    $n4 = $cc[3];
+    $n5 = $cc[4];
+    $n6 = $cc[5].$cc[6];
+    $n7 = $cc[7].$cc[8];
+    $n8 = $cc[9].$cc[10];
+    $n9 = $cc[11].$cc[12];
+    $n10 = $cc[13].$cc[14];
+    return "$n1.$n2.$n3.$n4.$n5.$n6.$n7.$n8.$n9.$n10";
+}
