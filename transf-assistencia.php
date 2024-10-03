@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Transferências da Assistência Social
+ * @description: Transferências da Assistência Social
  * 
- * @description: Calcula o valor das transferências da assistência social.
+ * Calcula o valor das transferências da assistência social.
  * 
  * 
  */
