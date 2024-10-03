@@ -1,7 +1,9 @@
 <?php
 
 /**
- * @description: Calcula o superavit ou deficit da dotação para folha de pagamento.
+ * @description: Dotação da Folha de Pagamento
+ * 
+ * Calcula o superavit ou deficit da dotação para folha de pagamento.
  * 
  */
 

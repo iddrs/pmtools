@@ -2,7 +2,9 @@
 
 
 /**
- * @description: Calcula o fluxo de caixa projetado para o encerramento do exercício.
+ * @description: Fluxo de Caixa Projetado
+ * 
+ * Calcula o fluxo de caixa projetado para o encerramento do exercício.
  */
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;

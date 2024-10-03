@@ -7,7 +7,9 @@ use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 /**
- * @description: Calcula o valor das transferências da saúde.
+ * @description: SIOPE: Rendimentos
+ * 
+ * Calcula o valor dos rendimentos para preencher o SIOPE
  * 
  * 
  */

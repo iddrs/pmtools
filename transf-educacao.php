@@ -1,7 +1,9 @@
 <?php
 
 /**
- * @description: Calcula o valor das transferências da educação.
+ * @description: Transferências da Educação.
+ * 
+ * Calcula o valor das transferências da educação.
  * 
  * 
  */

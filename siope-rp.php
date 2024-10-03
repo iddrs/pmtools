@@ -7,7 +7,9 @@ use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 /**
- * @description: Calcula o valor das transferências da saúde.
+ * @description: SIOPE: Restos a Pagar
+ * 
+ * Calcula o valor de restos a pagar para preencher o SIOPE.
  * 
  * 
  */

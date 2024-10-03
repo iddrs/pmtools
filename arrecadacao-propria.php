@@ -1,7 +1,9 @@
 <?php
 
 /**
- * @description: Calcula o valor de arrecadação própria para a remessa.
+ * @description: Arrecadação Própria
+ * 
+ * Calcula o valor de arrecadação própria para a remessa.
  * 
  * Arrecadação própria corresponde ao valor dos recursos previstos/arrecadados pelo esforço direto do ente.
  * 

@@ -1,7 +1,9 @@
 <?php
 
 /**
- * @description: Calcula o valor das transferências da saúde.
+ * @description: Receita da Dívida Ativa
+ * 
+ * Calcula o valor das receitas de dívida ativa.
  * 
  * 
  */
