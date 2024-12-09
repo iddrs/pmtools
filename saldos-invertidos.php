@@ -27,6 +27,7 @@ $cc_hibridas = [
     '821110105500000',
     '821110105710000',
     '821110107010000',
+    '821110107040000',
     '821110107510000',
 ];
 
@@ -75,7 +76,7 @@ $cc_invertidas = [
     '621310100000000',
     '621320000000000',
     '621390000000000',
-    
+
 ];
 
 require 'vendor/autoload.php';
@@ -122,7 +123,7 @@ switch ($opcao) {
 notice("Entidade selecionada: $entidade.");
 
 // Identifica se é para usar o balancete mensal ou o de encerramento.
-if($remessa->mes == 12) {
+if ($remessa->mes == 12) {
     printnl('');
     printnl('');
     printnl('Usar balancete de encerramento? [S/N]');
@@ -156,22 +157,22 @@ $result = pg_query_params(connect(), $sql, [$entidade, $remessa->remessa]);
 
 // Processa as contas
 $problemas = [];
-while($row = pg_fetch_assoc($result)) {
+while ($row = pg_fetch_assoc($result)) {
     $cc = $row['conta_contabil'];
     $saldo_final = $row['saldo_final'];
-    
+
     // Verifica se a conta é híbrida
-    if(in_array($cc, $cc_hibridas)) {
+    if (in_array($cc, $cc_hibridas)) {
         // Se a conta for híbrida, não tem porque testar o saldo.
         continue;
     }
-    
+
     // Verifica se o saldo é igual zero
-    if ($saldo_final == 0){
+    if ($saldo_final == 0) {
         // Se a conta não tem saldo final, não tem porque testar.
         continue;
     }
-    
+
     // Identifica a natureza de saldo esperada
     $classe_cc = (int) $cc[0]; // Pega o primeiro dígito da conta contábil
     switch ($classe_cc) {
@@ -180,9 +181,9 @@ while($row = pg_fetch_assoc($result)) {
         case 5:
         case 7:
             $natureza_esperada = 'D';
-            if($saldo_final > 0) {
+            if ($saldo_final > 0) {
                 $natureza_saldo_final = 'D';
-            }else {
+            } else {
                 $natureza_saldo_final = 'C';
             }
             break;
@@ -191,19 +192,19 @@ while($row = pg_fetch_assoc($result)) {
         case 6:
         case 8:
             $natureza_esperada = 'C';
-            if($saldo_final > 0) {
+            if ($saldo_final > 0) {
                 $natureza_saldo_final = 'C';
-            }else {
+            } else {
                 $natureza_saldo_final = 'D';
             }
             break;
-        default :
+        default:
             printnl("Conta $cc com primeiro dígito inválido: $classe_cc");
             exit();
     }
-    
+
     // Verifica se é conta retificadora
-    if(in_array($cc, $cc_invertidas)) {
+    if (in_array($cc, $cc_invertidas)) {
         switch ($natureza_esperada) {
             case 'D':
                 $natureza_esperada = 'C';
@@ -213,8 +214,8 @@ while($row = pg_fetch_assoc($result)) {
                 break;
         }
     }
-    
-    if($natureza_esperada !== $natureza_saldo_final) {
+
+    if ($natureza_esperada !== $natureza_saldo_final) {
         $problemas[] = [
             'cc' => fmt_cc($cc),
             'saldo' => fmt_currency($saldo_final),
@@ -234,7 +235,7 @@ printnl('=======================================================================
 printnl('RESULTADO');
 printnl('-----------------------------------------------------------------------');
 
-if(sizeof($problemas) > 0) {
+if (sizeof($problemas) > 0) {
     printnl("Conta contábil\t\t\tSaldo\t\t\tNatureza Encontrada\tNatureza Esperada");
     foreach ($problemas as $item) {
         printnl("{$item['cc']}\t{$item['saldo']}\t\t{$item['identificado']}\t\t\t{$item['esperado']}");
