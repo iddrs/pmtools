@@ -52,6 +52,9 @@ function error(string $msg): void {
  * @return string
  */
 function fmt_currency($value, int $decimals = 2): string {
+    if(is_null($value)){
+        $value = 0.0;
+    }
     return number_format($value, $decimals, ',', '.');
 }
 
