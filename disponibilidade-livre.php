@@ -55,7 +55,7 @@ $empenhado_a_pagar = pg_fetch_assoc($result, 0)['empenhado_a_pagar'];
 $sql = "SELECT
     sum(saldo_atual)::numeric AS duodecimo
     FROM pad.bal_ver
-  WHERE escrituracao like 'S' AND entidade like 'pm' and conta_contabil like '2189202%%'
+  WHERE escrituracao like 'S' AND entidade like 'pm' and conta_contabil like '218929801%%'
   AND remessa = $1;";
 $result = pg_query_params(connect(), $sql, [$remessa->remessa]);
 $duodecimo = pg_fetch_assoc($result, 0)['duodecimo'];
